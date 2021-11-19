@@ -1,9 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
+import MiniDrawer from "./components/MiniDrawer";
+
 ReactDOM.render(
 	<div>
-		<h1>Zajebiste aplikacja pog</h1>
+		<MiniDrawer />
 	</div>,
   document.getElementById("root")
 );
