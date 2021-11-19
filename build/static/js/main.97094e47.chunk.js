@@ -1,0 +1,2 @@
+(this["webpackJsonpcodingnight-2021"]=this["webpackJsonpcodingnight-2021"]||[]).push([[0],{4:function(e,t,i){"use strict";i.r(t);i(0);var n=i(3),c=i(2);n.render(Object(c.jsx)("div",{children:Object(c.jsx)("h1",{children:"Zajebiste aplikacja pog"})}),document.getElementById("root"))}},[[4,1,2]]]);
+//# sourceMappingURL=main.97094e47.chunk.js.map
