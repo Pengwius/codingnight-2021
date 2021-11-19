@@ -22,14 +22,16 @@ import EventNote from '@mui/icons-material/EventNote';
 import PendingActions from '@mui/icons-material/PendingActions';
 import Today from '@mui/icons-material/Today';
 import DateRange from '@mui/icons-material/DateRange';
+import Settings from '@mui/icons-material/Settings';
 
 import Timetable from '../views/timetable/Timetable';
 import Exams from '../views/exams/Exams';
 import Homeworks from '../views/homeworks/Homeworks';
 import Events from '../views/events/Events';
+import SettingsView from '../views/settings/SettingsView';
 
-const icons = [<DateRange />, <Today />, <PendingActions/>, <EventNote />];
-const views = ['/', '/exams', '/homeworks', '/events'];
+const icons = [<DateRange />, <Today />, <PendingActions/>, <EventNote />, <Settings />];
+const views = ['/', '/exams', '/homeworks', '/events', '/settings'];
 
 const drawerWidth = 240;
 
@@ -153,6 +155,13 @@ export default function MiniDrawer() {
             </ListItem>
           ))}
         </List>
+        <Divider />
+        <ListItem button component={Link} to={"/settings"} key={"Ustawienia"}>
+          <ListItemIcon>
+            {icons[4]}
+          </ListItemIcon>
+          <ListItemText primary={"Ustawienia"} />
+        </ListItem>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
@@ -162,6 +171,7 @@ export default function MiniDrawer() {
             <Route path='/exams' element={<Exams />} />
             <Route path='/homeworks' element={<Homeworks />} />
             <Route path='/events' element={<Events />} />
+            <Route path='/settings' element={<SettingsView />} />
           </Routes>
         </Typography>
       </Box>
