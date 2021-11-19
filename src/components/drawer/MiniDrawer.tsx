@@ -23,10 +23,10 @@ import PendingActions from '@mui/icons-material/PendingActions';
 import Today from '@mui/icons-material/Today';
 import DateRange from '@mui/icons-material/DateRange';
 
-import Timetable from '../views/Timetable';
-import Exams from '../views/Exams';
-import Homeworks from '../views/Homeworks';
-import Events from '../views/Events';
+import Timetable from '../views/timetable/Timetable';
+import Exams from '../views/exams/Exams';
+import Homeworks from '../views/homeworks/Homeworks';
+import Events from '../views/events/Events';
 
 const icons = [<DateRange />, <Today />, <PendingActions/>, <EventNote />];
 const views = ['/', '/exams', '/homeworks', '/events'];
