@@ -45,9 +45,22 @@ const rows = [
   createData('Test', 'Test', 'Test', 'Test', 'Test', 'Test'),
 ];
 
+const openAddLessonWindow = () => {
+  console.log(document.querySelector(`.addLessonWindow`));
+  document.querySelector<HTMLElement>('.addLessonWindow').style.display = 'block';
+};
+
+const closeAddLessonWindow = () => {
+  console.log(document.querySelector(`.addLessonWindow`));
+  document.querySelector<HTMLElement>('.addLessonWindow').style.display = 'none';
+};
+
 export default function Timetable() {
 	return(
     <div>
+      <div className='addLessonWindow'>
+        <Button onClick={closeAddLessonWindow}>Close</Button>
+      </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
@@ -78,7 +91,7 @@ export default function Timetable() {
       </TableContainer>
       <br />
       <div className="addLessonButton">
-      <Button variant="contained">Dodaj lekcję</Button>
+        <Button onClick={openAddLessonWindow} variant="contained">Dodaj lekcję</Button>
       </div>
     </div>
   );
