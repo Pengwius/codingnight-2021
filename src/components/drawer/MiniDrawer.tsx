@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -22,7 +23,13 @@ import PendingActions from '@mui/icons-material/PendingActions';
 import Today from '@mui/icons-material/Today';
 import DateRange from '@mui/icons-material/DateRange';
 
-const icons = [<DateRange />, <Today />, <PendingActions/>, <EventNote />]
+import Timetable from '../views/Timetable';
+import Exams from '../views/Exams';
+import Homeworks from '../views/Homeworks';
+import Events from '../views/Events';
+
+const icons = [<DateRange />, <Today />, <PendingActions/>, <EventNote />];
+const views = ['/', '/exams', '/homeworks', '/events'];
 
 const drawerWidth = 240;
 
@@ -125,7 +132,7 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+            eduGO!
           </Typography>
         </Toolbar>
       </AppBar>
@@ -138,7 +145,7 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {['Plan lekcji', 'Sprawdziany', 'Zadania Domowe', 'Eventy'].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button component={Link} to={views[index]} key={text}>
               <ListItemIcon>
                 {icons[index]}
               </ListItemIcon>
@@ -149,8 +156,13 @@ export default function MiniDrawer() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <Typography paragraph>
-          <h1>Hello World</h1>
+        <Typography paragraph id='content'>
+          <Routes>
+            <Route path='/' element={<Timetable />} />
+            <Route path='/exams' element={<Exams />} />
+            <Route path='/homeworks' element={<Homeworks />} />
+            <Route path='/events' element={<Events />} />
+          </Routes>
         </Typography>
       </Box>
     </Box>
