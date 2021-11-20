@@ -2,15 +2,50 @@
 	float: right;
 }
 
+.addLessonWindowButton {
+	margin-left: 100%;
+}
+
 .addLessonWindow {
 	background-color: white;
 	width: 65%;
-	height: 65%;
+	min-height: 60%;
 	position: absolute;
 	top: 20%;
-	right: 18%;
+	right: 16%;
 	border-radius: 12px;
 	box-shadow: 5px 5px 20px #000;
-	z-index: 2137;
+	z-index: 2;
 	display: none;
 }
+
+.allLessonTitle {
+	text-align: center;
+}
+
+.addLessonWindow h1 {
+	text-align: center;
+}
+
+.addLessonForm {
+	text-align: center;
+	margin: 5%;
+}
+
+.MuiTableHead-root {
+	background-color: #42A5F5;
+}
+
+.details {
+	display: none;
+	background-color: white;
+	width: 65%;
+	min-height: 60%;
+	position: absolute;
+	top: 20%;
+	right: 16%;
+	border-radius: 12px;
+	box-shadow: 5px 5px 20px #000;
+	z-index: 2;
+}
+

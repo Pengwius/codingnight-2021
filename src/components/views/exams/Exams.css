@@ -1,3 +1,41 @@
 .addExamButton {
 	float: right;
 }
+
+.addExamWindowButton {
+	margin-left: 100%;
+}
+
+.addExamWindow {
+	background-color: white;
+	width: 65%;
+	min-height: 60%;
+	position: absolute;
+	top: 20%;
+	right: 16%;
+	border-radius: 12px;
+	box-shadow: 5px 5px 20px #000;
+	z-index: 2;
+	display: none;
+}
+
+.allExamTitle {
+	text-align: center;
+}
+
+.addExamWindow h1 {
+	text-align: center;
+}
+
+.addExamForm {
+	text-align: center;
+	margin: 5%;
+}
+
+.MuiTableHead-root {
+	background-color: #42A5F5;
+}
+
+.examContent {
+	display: none;
+}

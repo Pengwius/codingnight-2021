@@ -30,6 +30,9 @@ import Homeworks from '../views/homeworks/Homeworks';
 import Events from '../views/events/Events';
 import SettingsView from '../views/settings/SettingsView';
 
+import logo from '../../images/logo.gif';
+import './MiniDrawer.css'
+
 const icons = [<DateRange />, <Today />, <PendingActions/>, <EventNote />, <Settings />];
 const views = ['/', '/exams', '/homeworks', '/events', '/settings'];
 
@@ -138,7 +141,7 @@ export default function MiniDrawer() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer className="drawer" variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -155,13 +158,6 @@ export default function MiniDrawer() {
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <ListItem button component={Link} to={"/settings"} key={"Ustawienia"}>
-          <ListItemIcon>
-            {icons[4]}
-          </ListItemIcon>
-          <ListItemText primary={"Ustawienia"} />
-        </ListItem>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />

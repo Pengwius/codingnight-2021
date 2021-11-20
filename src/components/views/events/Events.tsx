@@ -9,77 +9,114 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import './Events.css'
+import IconButton from '@mui/material/IconButton';
+import Close from '@mui/icons-material/Close';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
+const openAddEventWindow = () => {
+  console.log(document.querySelector(`.addEventWindow`));
+  document.querySelector<HTMLElement>('.addEventWindow').style.display = 'block';
+};
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
-
-function createData(
-  lesson: string,
-  monday: string,
-  tuesday: string,
-  wednesday: string,
-  thursday: string,
-	friday: string,
-) {
-  return { lesson, monday, tuesday, wednesday, thursday, friday};
-}
-
-const rows = [
-  createData('Test', 'Test', 'Test', 'Test', 'Test', 'Test'),
-];
-
+const closeAddEventWindow = () => {
+  console.log(document.querySelector(`.addEventWindow`));
+  document.querySelector<HTMLElement>('.addEventWindow').style.display = 'none';
+};
 
 export default function Events() {
+  React.useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  const [username, setUsername] = React.useState<string | null>();
+
+  const handleChangeUsername = (newValue: undefined) => {
+    let value = newValue as InputEvent;
+    setUsername((value.target as HTMLInputElement).value);
+  };
+
+  const [title, setTitle] = React.useState<string | null>();
+
+  const handleChangeTitle = (newValue: undefined) => {
+    let value = newValue as InputEvent;
+    setTitle((value.target as HTMLInputElement).value);
+  };
+
+  const [content, setContent] = React.useState<string | null>();
+
+  const handleChangeContent = (newValue: undefined) => {
+    let value = newValue as InputEvent;
+    setContent((value.target as HTMLInputElement).value);
+  };
+
+  const addEvent = () => {
+    const payload = {
+      creator: username,
+      title: title,
+      content: content
+    };
+
+    fetch('http://localhost:5000/uploadEvent', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    })
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+      closeAddEventWindow();
+    };
+
+  const fetchEvents = () => {
+    fetch('http://localhost:5000/getEvents')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        data.response.forEach(event => {
+          console.log(event);
+          document.querySelector<HTMLElement>('.events').innerHTML += `<div class="event">Od: ${(event as any).creator}<br />Tytuł: ${(event as any).title}<br /><hr />${(event as any).content}<br /><hr />Data: ${(event as any).date}<br /></div>`;
+      })
+      })
+  };
+
 	return(
     <div>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Lekcja</StyledTableCell>
-              <StyledTableCell align="right">Poniedziałek</StyledTableCell>
-              <StyledTableCell align="right">Wtorek</StyledTableCell>
-              <StyledTableCell align="right">Środa</StyledTableCell>
-              <StyledTableCell align="right">Czwartek</StyledTableCell>
-              <StyledTableCell align="right">Piątek</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.lesson}>
-                <StyledTableCell component="th" scope="row">
-                  {row.lesson}
-                </StyledTableCell>
-                <StyledTableCell align="right">{row.monday}</StyledTableCell>
-                <StyledTableCell align="right">{row.tuesday}</StyledTableCell>
-                <StyledTableCell align="right">{row.wednesday}</StyledTableCell>
-                <StyledTableCell align="right">{row.thursday}</StyledTableCell>
-                <StyledTableCell align="right">{row.friday}</StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <br />
+      <div className="events">
+      </div>
+      <div className="addEventWindow">
+        <IconButton className="closeAddEventWindow" onClick={closeAddEventWindow}><Close style={{ color: "red" }} /></IconButton>
+        <h1>Dodaj event</h1>
+        <Box
+          component="form"
+          sx={{
+            '& .MuiTextField-root': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+          className="addEventForm"
+        >
+          <TextField
+            id="outlined-required"
+            label="Nazwa użytkownika"
+            onChange={handleChangeUsername}
+          />
+          <TextField
+            id="outlined-required"
+            label="Tytuł"
+            onChange={handleChangeTitle}
+          />
+          <TextareaAutosize
+            placeholder="Treść"
+            onChange={handleChangeContent}
+          />
+
+          <Button className="addEventWindowButton" onClick={addEvent} variant="contained">Dodaj event</Button>
+        </Box>
+      </div>
+
       <div className="addEventButton">
-      <Button variant="contained">Dodaj event</Button>
+        <Button onClick={openAddEventWindow} variant="contained">Dodaj event</Button>
       </div>
     </div>
 	);
